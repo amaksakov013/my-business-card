@@ -44,6 +44,35 @@
   object-position: center bottom;
 }
 
+/* On large screens, keep the complete 3x2 works grid inside one viewport. */
+@media (min-width: 1025px) {
+  .works.section {
+    padding-top: clamp(38px, 5vh, 64px);
+    padding-bottom: clamp(50px, 6vh, 76px);
+  }
+
+  .works h2 {
+    font-size: clamp(2.35rem, 3.3vw, 3.75rem);
+    max-width: 760px;
+  }
+
+  .works .section-copy {
+    margin-top: 18px;
+    margin-bottom: 26px;
+    line-height: 1.6;
+  }
+
+  .gallery__item,
+  .gallery__item:nth-child(n) {
+    height: clamp(225px, 26vh, 315px);
+    aspect-ratio: auto;
+  }
+
+  .works .quote {
+    margin-top: 20px;
+  }
+}
+
 .sizes__image {
   min-width: 0;
   min-height: 0;
