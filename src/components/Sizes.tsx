@@ -4,7 +4,7 @@ import { Reveal } from './Reveal'
 
 export function Sizes() {
   return (
-    <section id="sizes" className="section shell sizes">
+    <section id="sizes" className="section shell sizes sizes--combined">
       <div className="sizes__image">
         <img
           src="/images/sizes.jpg"
@@ -43,6 +43,17 @@ export function Sizes() {
         <a className="text-link" href={telegramUrl} target="_blank" rel="noreferrer">
           Обсудить заказ <ArrowUpRight size={17} />
         </a>
+      </Reveal>
+
+      <Reveal className="sizes__uniqueness">
+        <p className="eyebrow">
+          <i />Без повторов
+        </p>
+        <h3>Как отпечаток пальца. Только из бетона.</h3>
+        <p>
+          Вы можете выбрать оттенки, но точное повторение невозможно — бетон каждый раз
+          создаёт новую текстуру.
+        </p>
       </Reveal>
     </section>
   )
