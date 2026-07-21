@@ -1,0 +1,4 @@
+# Replace betonina.example with the production domain before launch.
+User-agent: *
+Allow: /
+Sitemap: https://betonina.example/sitemap.xml
