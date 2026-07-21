@@ -1,0 +1,2 @@
+import { Reveal } from './Reveal'
+export function Uniqueness() { return <section className="section uniqueness"><div className="shell"><Reveal><p className="eyebrow"><i />Без повторов</p><h2>Как отпечаток пальца.<br />Только из <em>бетона.</em></h2><p>Даже когда делаешь всё одинаково, результат всегда немного разный. Бетон сам формирует слои, переходы и живую текстуру, поэтому точное повторение невозможно.</p><p className="quote">Я знала, что оно будет ярким. Но не настолько.</p></Reveal></div></section> }

@@ -1,0 +1,2 @@
+import { telegramUrl } from '../data/content'
+export function Footer() { return <footer className="footer"><div className="shell footer__inner"><div><a className="brand" href="#top">Бето<span>Нина</span></a><p>Кашпо ручной работы из бетона</p></div><div><p>Telegram:</p><a href={telegramUrl} target="_blank" rel="noreferrer">@NinaBetonina</a></div><div><p>© 2026 БетоНина</p><a href="#top">Наверх ↑</a></div></div></footer> }
