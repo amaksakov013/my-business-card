@@ -1,11 +1,14 @@
 import { ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { heroImages, telegramUrl } from '../data/content'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+
+const SWIPE_THRESHOLD = 45
 
 export function Hero() {
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
+  const swipeStartX = useRef<number | null>(null)
   const reduced = useReducedMotion()
 
   const change = useCallback(
@@ -20,6 +23,29 @@ export function Hero() {
     const timer = window.setInterval(() => change(1), 5500)
     return () => window.clearInterval(timer)
   }, [change, paused, reduced])
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return
+    swipeStartX.current = event.clientX
+    setPaused(true)
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  const finishSwipe = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (swipeStartX.current === null) return
+
+    const distance = event.clientX - swipeStartX.current
+    swipeStartX.current = null
+    setPaused(false)
+
+    if (Math.abs(distance) < SWIPE_THRESHOLD) return
+    change(distance < 0 ? 1 : -1)
+  }
+
+  const cancelSwipe = () => {
+    swipeStartX.current = null
+    setPaused(false)
+  }
 
   return (
     <section className="hero shell" id="top">
@@ -50,7 +76,13 @@ export function Hero() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="hero__visual">
+        <div
+          className="hero__visual"
+          onPointerDown={handlePointerDown}
+          onPointerUp={finishSwipe}
+          onPointerCancel={cancelSwipe}
+          aria-label="Галерея кашпо. На смартфоне смахните влево или вправо для переключения"
+        >
           {heroImages.map((image, index) => (
             <img
               key={image.src}
@@ -60,6 +92,7 @@ export function Hero() {
               width="900"
               height="1120"
               fetchPriority={index === 0 ? 'high' : 'auto'}
+              draggable={false}
             />
           ))}
         </div>
