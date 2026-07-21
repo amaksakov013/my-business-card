@@ -7,11 +7,20 @@
   height: min(67vh, 660px);
   min-height: 450px;
   background: #0d0c10;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+
+.hero__visual:active {
+  cursor: grabbing;
 }
 
 .hero__visual img {
   object-fit: contain;
   object-position: center bottom;
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
 .slider-controls {
@@ -20,6 +29,13 @@
   justify-content: center;
   gap: 18px;
   padding-top: 14px;
+}
+
+#works,
+#sizes,
+#artist,
+#order {
+  scroll-margin-top: 72px;
 }
 
 .gallery {
@@ -71,6 +87,19 @@
   .works .quote {
     margin-top: 20px;
   }
+
+  /* When opening “О мастере”, keep the following order block outside the viewport. */
+  .artist.section {
+    min-height: calc(100svh - 72px);
+    align-content: center;
+    padding-top: clamp(64px, 8vh, 100px);
+    padding-bottom: clamp(64px, 8vh, 100px);
+  }
+
+  .order.section {
+    padding-top: clamp(72px, 9vh, 110px);
+    padding-bottom: clamp(80px, 10vh, 120px);
+  }
 }
 
 .sizes__image {
@@ -100,6 +129,36 @@
 }
 
 @media (max-width: 760px) {
+  #works,
+  #sizes,
+  #artist,
+  #order {
+    scroll-margin-top: 64px;
+  }
+
+  /* The text becomes a complete first screen; the photo starts on the next screen. */
+  .hero {
+    gap: 0;
+    padding-top: 0;
+    padding-bottom: 54px;
+  }
+
+  .hero__copy {
+    min-height: calc(100svh - 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 38px 0 34px;
+  }
+
+  .hero__copy .aside {
+    margin-top: 38px;
+  }
+
+  .hero__media {
+    margin-top: 0;
+  }
+
   .hero__visual {
     height: min(132vw, 560px);
     min-height: 430px;
@@ -107,6 +166,11 @@
 
   .slider-controls {
     padding-top: 12px;
+  }
+
+  .slider-controls > button {
+    width: 38px;
+    height: 38px;
   }
 
   .gallery {
@@ -126,5 +190,25 @@
   .sizes__image img {
     width: 100%;
     max-height: none;
+  }
+}
+
+@media (max-width: 390px) and (max-height: 740px) {
+  .hero__copy {
+    justify-content: flex-start;
+    padding-top: 28px;
+  }
+
+  .hero__copy h1 {
+    font-size: clamp(2.4rem, 12vw, 3.1rem);
+  }
+
+  .hero__copy .lead {
+    margin: 22px 0;
+    line-height: 1.65;
+  }
+
+  .hero__copy .aside {
+    margin-top: 28px;
   }
 }
